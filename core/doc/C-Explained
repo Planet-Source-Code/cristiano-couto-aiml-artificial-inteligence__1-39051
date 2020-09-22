@@ -1,0 +1,108 @@
+Q: How does the preprocessor work?  What does initialize() do?
+
+1. When you call initialize, first it creates the variables alice needs to
+work.  Then it checks to see if template.txt and patterns.txt exsist.  If
+they do, it skips to step 5.
+
+2. If patterns.txt and templates.txt don't exsist.  It starts creating
+them.  First it opens up the file C.aiml.  It then reads this file, and
+starts loading each of the filenames contained in this file into a file
+called temp.txt.  While it is loading them, it checks for common errors.
+
+3. Once we have temp.txt filled with all our AIML files.  We start
+breaking up the temp.txt into patterns.txt and templates.txt.  While we do
+this, we replace the commonly used tags with shorthand tags.  This keeps
+down on file size.  We place a file pointer in patterns.txt to the
+appropiate line in templates.txt
+
+4. Now that we have templates.txt and patterns.txt alice alphabatizes 
+patterns.txt.  
+
+5.  She then scans the entire patterns.txt to make an internal array of
+filepointers pointing to the first pattern starting with every letter in
+the alphabet she also scans for * and _.  This speeds up alice's internal
+proccesing. 
+
+That's all there is to it.
+
+Q: How does match work?
+
+Answer From: Jacco Bikker <Jacco.Bikker@davilex.nl>
+
+Match accepts a line (usually user input) and a pattern, and
+returns 'true' if the pattern matches. There's also a parameter
+'final'. That's because usually multiple patterns match a
+sentence ('*', for example) but you only want to set some
+variables ('that', for example) if the pattern is actually used for
+a response. So, 'final=true' indicates that you evaluated all
+relavant patterns and want to use the one that comes with
+the call that has 'final' set to true. Let me know if that
+explanation is too vague.
+
+Then:
+- The pattern is compared to the text. If they are the same, we
+have a perfect match, and 'true' is returned.
+Example: <pattern>HELLO</pattern> and user input is
+'HELLO'.
+- The next lines (I'm not sure if it's in C Alice, it's in WinAlice
+anyway) checks for the special case of a pattern with double
+'*', e.g. '<pattern>*HELLO*</pattern>. These patterns match
+for any string that has 'HELLO' in it. It's used for some
+experimental stuff.
+- Then match tests if there is ONLY a '*' in the pattern. If that
+is the case, the pattern always matches, so 'true' is returned.
+Example: <pattern>*</pattern>, user input is 'JHGFJG'.
+- Then the position of a '*' (or '_') is determined. If there is no
+'*' or '_', false is returned, since the strings are not equal (that
+was tested earlier).
+Example: <pattern>HELLO</pattern>, user input is 'HI'.
+- The next 'if': if (starpos > 0)
+  checks if the '*' is not at the first position of the pattern.
+if this is the case, the part of the pattern before the wildcard
+must match the same amount of characters in the input
+string. If not, 'false' is returned. If it does match, and there's
+nothing after the wildcard, 'true' is returned.
+Example: <pattern>HELLO*</pattern>, user input is
+'HELLO ALICE'.
+Example of something behind the '*':
+<pattern>HELLO*COMPUTER</pattern>, user input is
+'HELLO STUPID COMPUTER': doesn't return false, since
+the first part of the pattern matches (HELLO), but it doesn't 
+return true either, since more tests are needed on the 
+remainder (COMPUTER) of the pattern.
+- Then an end-of-line character is added to the user input
+string (to make testing possible).
+- The string behind the wildcard in the pattern is copied to
+a temporary string, and an end-of-line character is added
+(also for testing).
+- The final 'if' statement checks if this second part of
+the pattern appears in the user input.
+Example: <pattern>HELLO*COMPUTER</pattern>,
+user input is 'HELLO STUPID COMPUTER THING': The 
+first 'if' succeeds, because 'COMPUTER' is part of the
+user input.
+- The nested 'if' checks if that's all there is in the user input, 
+and returns 'true' if it is.
+Example: <pattern>HELLO*COMPUTER</pattern>,
+user input is 'HELLO STUPID COMPUTER THING': The 
+second 'if' fails, because the user typed more than just
+'computer' after the wildcard, and the pattern doesn't
+allow that.
+- Finally, 'false' is returned, because none of the earlier
+tests indicated a match.
+
+Q: How does reevaluate() work?
+
+A: reevaluate matches the tags in this order:
+
+<random>
+<think></think>
+<star/>
+<that/>
+<person/>
+<person2/>
+<personf/>
+<getvar name=foo/>
+<setvar name=foo>bar</setvar>
+<system></system>
+<gossip></gossip>

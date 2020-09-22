@@ -1,0 +1,55 @@
+See BUGS for bugs Ive found but haven't been able to/ got around to fixing.
+
+See TODO for things I've been meaning to do, but am too lazy :)
+
+See CHANGES for things that have changed since the beggining.  (not entirely
+100% complete but I tried my best to keep it up to date)
+
+There are several things to note with this version of C alice.
+
+- There is a file C.aiml that needs to be present.  This file isn't an actual
+aiml file.  It's simply an index of the aiml files you want to load up.  put
+in the path and filename of the aiml files you want loaded in there, seperated
+by CRLF
+
+for example:
+
+alice/Atomic.aiml
+alice/69Percent.aiml
+....
+.... (more files in here)
+....
+alice/Brain.aiml
+
+
+-There's really only 4 functions you need to use in any alice interface.
+loadvars(filename);
+savevars(filesname);
+respond(text);
+initialize();
+
+-a super simple program using alice would be.
+
+initialize();
+loadvars(users_ip);
+
+while (user_is_still_talking_to_alice) {
+  get_string(user_response);
+  alices_answer = respond(user_response);
+  print_out(alices_answer);
+}
+
+savevars(users_ip);  
+
+-loadvars() and savevars() can have any file name.  But for multiple users,
+you want a seperate var file for each user.  So pick something unique. (IP
+address, user name, e-mail address, etc.)  For single user applications.  Pick
+something static, such as loadvars("data/localhost.txt") and
+savevars("data/localhost.txt") 
+
+-There is a make file that should help compiling on unix systems.  Type 'make
+help' for details.
+
+-Questions/comments.  E-mail me at taylor@cs.mwsu.edu
+
+

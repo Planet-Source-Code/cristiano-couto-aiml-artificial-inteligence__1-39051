@@ -1,0 +1,22 @@
+For topics -
+  create another topic file called topic.txt
+  the first thing we have in this file.. is a list of topics..  and
+  their tpos in the file.
+  then further on down we have the patterns and templates for the
+topics..
+
+  what we do.. is if the topic isn't our normal one..  we start going
+through topic.txt, if we find a match in the topic list above..  we sort
+through those patterns and templates..
+
+if we don't find a match.. then nothing.
+
+but we do all this after we have searched through our normal stuff.
+What were looking for.. is another match that's EXACTLY the same as the
+match we got in our normal patterns and templates.
+
+For <that index = 1> - 
+  one of these days, we'll have to put logging into the core, when that
+happens, we can use these logs to look up what our past that's were..
+since this shouldn't happen that often, it wouldn't me that much of a
+waste of time.
