@@ -1,0 +1,53 @@
+The following people have made significant contributions to the C-alice project.
+
+Dr. Wallace <dr.wallace@mindspring.com> originally created alice, wrote
+the original CGI code for C alice, wrote classify.c donated the
+hippie.alicebot.com website, and gave much needed advice and support. 
+Without him, there would be no alice. 
+
+Jacco Bikker <Phantom@goright.to> wrote the original C code that this version
+is based on. Much of the code inside alice_core is still his.  He has also given
+much needed advice, and explainations. 
+
+Kris Northern <knorthern@outlook.net> created web graphics and a page layout for
+hippie. It has been said that hippie.alicebot.com is the best looking page in
+the alicebot.com domain.  This we owe to him. 
+
+Philippe Raxhon <praxhon@crl.be> provided many bug fixes, and code suggestions,
+and also came up with the idea and implementation of init files for
+C-alice.  He also regularly checks for windows compatibility.
+
+Terry Welch <malatesa@lemoorenet.com> provided an eggdrop script that now
+is used with command alice.  He also started work on ICQ Alice which I
+hope to get completed soon.  He also created the cl_search.tcl minibot. 
+You can see his work on the alice project at
+http://hippie.alicebot.com/~twelch
+
+Chicoine Rejean <komodo36@hotmail.com> modified the eggdrop script so
+that it worked with private messages and when the bots name is called.
+
+Stephen Logan <slogan@stephenlogan.com> provided a perl script that uses command
+alice for IRC.
+
+Jedi Striker <jedi1@ig.com.br> provided a TCP/IP version of Alice.
+
+Kirk Munoz provided new aiml content in ology1.aiml.
+
+David Maggins continues to ask questions that make me go "hmm."  
+
+Sage Greco created Smilee's graphics.
+
+Diana Andreacchio <andria1@mindspring.com> contributed the srai explanation in
+the AIML mini primer.
+
+Sergey Bogdanov <desprojects@yahoo.com> cleaned up stuff.cpp considerably.
+
+Thanks to all those at equality.ipa.net who helped me beta-test and check
+for bugs.
+
+Many people contributed to the Java alice project, and their contributions have
+had an effect on the C alice project.  You can view their contributions at
+http://www.alicebot.org/creators.html
+
+A special thanks to all those on the message list, and those who ran C alice and
+found bugs.

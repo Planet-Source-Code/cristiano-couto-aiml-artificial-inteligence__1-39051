@@ -1,0 +1,81 @@
+<alice></alice> begin and end AIML file
+<category></category> begin and end of a category
+<pattern></pattern>  What the client says
+<template><template> What the bot says back
+<star/> indicates the input text fragment matching the pattern '*' or '_'.
+
+<that></that> If previous bot reply matches the THAT this event is fired.
+<that/> = <that><star></that>  
+<justbeforethat> </justbeforethat>
+<justthat> </justthat>
+
+Client : hi
+Robot  : Hi there. < - justbeforethat
+Client : What's up? <- just that
+Robot  : Not much just chatting with clients on the internet.  <- that
+
+** Please note, sometime in the future, these tags may be replaced with
+  <that index = "#">  <that> will be a default of index = 0
+
+<person2> X </person2> change X from 1st to 2nd person 
+<person2/> = <person2><star/></person2>
+<person> X </person> exchange 1st and 3rd person   
+<person/> = <person><star/></person>
+1st is your view / 2nd is someone elses / 3rd is omnipotent
+I am cool /  He is cool / You are cool
+
+<srai> X </srai> calls the pattern matches recursively on X.  
+<sr/> =<srai><star/></srai>
+
+<random> <li>X1</li><li>X2</li> </random> Say one of X1 or X2 randomly
+<system>X</system> tag to run the shell command X
+<think> X </think> tag pair is to evaluate the AIML expression X, but
+"nullify" or hide the result from the client reply.
+
+<gossip> X </gossip> Save X as gossip.
+
+Here are the get and set tags.
+** Please note, in the future these may be replaced with
+  <getvar name = "Name Of Variable" default="Default if no variable
+found"/>
+and
+  <setvar name = "Name Of Variable"> Set it to this </setvar>
+
+<getvar and <setvar may be getpred and setpred depending on what the
+general concensus is.
+
+
+  <name/> Robot's name
+  <location/> Robot's location
+  <gender/> Robot's gender
+  <birthday/> Robot's birthday
+  <getsize/> get catagory size    
+  <botmaster/> Botmasters name
+
+  <get_ip/> Get the client's IP address
+  <getname/> client's name
+  <gettopic/> The "topic" of conversation
+  <get_location/> the client's geographic location
+  <get_it/> the value of "it"
+  <get_they/> the value of "they"
+  <get_he/> the value of "he"
+  <get_she/> the value of "she"
+  <get_we/> the value of "we"
+  <get_gender/> a string like "she" or "he" for client gender
+  <get_dialogue/>
+
+  <set_male/> the client gender is male
+  <set_female/> the client gender is female
+  <set_animagent/> activates the animation agent. 
+
+  <setname> X </setname> sets the client name to X
+  <set_location> X </set_location> sets the value of client location
+  <set_thought> X </set_thought> value of "thought" to X
+  <settopic> X </settopic> sets the topic to X
+  <set_it> X </set_it> sets the value of "it" to X 
+  <set_they> X </set_they> sets the value of "they" to X 
+  <set_he> X </set_he> sets the value of "he" to X 
+  <set_she> X </set_she> sets the value of "she" to X 
+  <set_we> X </set_we> sets the value of "we" to X 
+
+

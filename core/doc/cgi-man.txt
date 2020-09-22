@@ -1,0 +1,188 @@
+First things first..  you'll need the following.
+
+A web account that will allow you to do the following,
+
+- telnet access to the account.
+- allow you to run cgi executables.
+- allow you to use gcc and make for compiling.
+
+You will also need the following information from your web provider.
+
+- the name of the directory web files appear in.
+(note, it's usually something like public_html, pub_html, web, www_html, or www)
+- the name of the directory cgi files must run in.
+(note, it's usually something like cgi-bin, cgi, or cgi_bin)
+- any additional instructions for running executable cgi programs.
+
+(Note, in my examples I use at_c_alice_0.2.X.tar.gz replace the X with the latest version.)
+
+You'll need to somehow get the zipped program onto the host machine.
+Follow either one of these two ways.
+
+----ftp
+Open up an ftp program
+(note windows comes with one click on START/RUN then type ftp.)
+type the following
+open myhost.com  (insert your host machines address)
+You will then be prompted for your username and your password. enter these.
+bin
+send /directory/alice/lies/in/at_c_alice_0.2.X.tar.gz
+
+(this method assumes you have at_c_alice on your machine.)
+----
+
+----telnet
+Open up a telnet program
+(note windows comes with one, click START/RUN then type telnet.)
+Go to Connect/Remote System
+Type in your hostname in the host field
+Click Connect
+You'll then be prompted for your username and password, enter these.
+Now type 
+lynx http://hippie.alicebot.com/at_c_alice_0.2.X.tar.gz
+Lynx should now say "application/gzip  D)ownload, or C)ancel
+Hit d for download
+After it is finished downloading, highlight the save to disk option and hit enter.
+it will then tell you to enter a filename, just hit enter.
+Then exit lynx by typing q (for quit) then y (for yes)
+----
+
+You should now have the compressed alice file on your host system.
+
+You will need to telnet into your host system.
+
+Open up a telnet program
+(note windows comes with one, click START/RUN then type telnet.)
+Go to Connect/Remote System
+Type in your hostname in the host field
+Click Connect
+You'll then be prompted for your username and password, enter these.
+
+You are now telneted into your host system.
+type ls
+You should see in the list that is returned the file at_c_alice_0.2.X.tar.gz
+if you do not see this file, something went wrong with getting your file there and you will need to start over.
+
+Now you must uncompress and untar the file.
+Type 
+gunzip at_c_alice_0.2.X.tar.gz
+then type
+tar -xpmvf at_c_alice_0.2.X.tar.gz
+
+Now type ls again
+
+You should have a directory called 'C' if not start over.
+enter that directory
+cd C
+enter the source directory that lies inside it
+cd source
+make the files you'll need
+make all
+(note sometimes make doesn't work on all systems, if it doesn't appear to work on your system, try 'gmake all' instead)
+
+you should now have a compiled version of alicebot.
+
+You'll need to install it to the right place
+Heres were you'll need some of the information you gathered.
+
+you'll need to fill in the blanks in this command
+
+make install DIST=/home/YourUserName/Your_Web_Directory/Your_CGI_Directory
+
+(note, please use the FULL pathname, and do not enter a / at the end.)
+
+This should install alice in the cgi directory.
+
+***  take a break, go grab a drink.
+
+At this point we should have a nice clean install of alice..  So what we'll do is test her out.
+
+Type 
+cd ~
+(this brings you back to your home directory)
+then type
+cd Your_Web_directory
+and
+cd Your_CGI_Directory
+
+now type
+ls
+You should see ammong other things a program called "plain_alice"
+run this by typing
+./plain_alice
+You should get a screen that goes something like this.
+
+Adding aiml/Atomic.aiml...Added.
+Adding aiml/Brain.aiml...Added.
+Adding aiml/Defaults.aiml...Added.
+Adding aiml/Dont.aiml...Added.
+Adding aiml/Gossip.aiml...Added.
+Adding aiml/Inventions.aiml...Added.
+Adding aiml/Knowledge.aiml...Added.
+Adding aiml/Lizards.aiml...Added.
+Adding aiml/Numbers.aiml...Added.
+Adding aiml/Personality.aiml...Added.
+Adding aiml/Pickup.aiml...Added.
+Adding aiml/Proverbs.aiml...Added.
+Adding aiml/Srai.aiml...Added.
+Adding aiml/Suffixes.aiml...Added.
+Adding aiml/That.aiml...Added.
+Adding aiml/Top10.aiml...Added.
+Adding aiml/YesNo.aiml...Added.
+
+Sorting Patterns: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Program C - A basic 'Alice' implementation in C++
+-------------------------------------------------
+
+Hello!
+>
+
+Type away if you wish..  to exit the program type 'exit'
+
+You know now that alice is working.. now just to get cgi_alice working
+
+Many cgi setups require you to have the .cgi extension on cgi files..  because of this.. we'll rename cgi_alice
+
+mv cgi_alice cgi_alice.cgi
+
+Now we need to set it so people can use alice.
+
+chmod 755 cgi_alice.cgi
+
+now you need to make is so alice can write to her data and log directories.
+
+chmod 755 data   (note.. if the AIML is not allready precompiled.. that is there is NO patterns.txt and templates.txt in your data directory.. you will need to do chmod 777 data)
+chmod 777 log
+
+Now you'll need to enter your data directory 
+cd data
+and edit your skeleton.txt
+pico skeleton.txt
+
+Pico is an easy to use text editor.  You'll need to change the part that says
+http://YouNeedToChangeThis.Com  to wherever you would point your browser to access the bot.
+(usually this will be something like http://www.MyHost.com/~Username/cgi-bin/cgi_alice.cgi
+
+Then open up your web-browser and hit the page..  hopefully with luck it'll work.
+
+If it does..  grab another drink and scrap this paper.. your done.
+
+If it doesn't..  try the following.
+
+Sometimes it seems skeleton.txt doesn't work correctly.  Try simply opening it up in a text editor and saving it.
+If you still have problems try doing this with alice.ini and defvars.txt, this could also solve them.
+
+If you still have problems.. try contacting your webhost provider and asking for assistence..  they may be able to take a peek and see what's up.
+They should know their machine fairly well, and should know exactly how to get cgi-executables to work.
+
+Hopefully this all works..  if it doesn't then you can try e-mailing me..  please however make sure you include the following information.
+-- type of computer your compiling/running on.
+-- type of OS (operating system) your working on.
+-- name of the webserver your working on.
+-- any pastings of errors that occured.
+-- what you were doing when the error occured.
+-- the web address where I may access the error'd alice.
+
+My e-mail is taylor@cs.mwsu.edu
+
+Anthony Taylor
